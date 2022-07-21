@@ -9,11 +9,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-//import Logo from '../../../public/assets/';
+import CartWidget from './CartWidget';
+
 
 const pages = ['Inicio', 'Productos', 'Quiénes Somos', 'Contacto'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+//const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -125,7 +125,7 @@ const ResponsiveAppBar = () => {
 
           <Box sx={{ flexGrow: 0 }}>
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <ShoppingCartIcon style={{color: 'white'}}/>
+                <CartWidget /> 
               </IconButton>
             <Menu
               sx={{ mt: '45px' }}
