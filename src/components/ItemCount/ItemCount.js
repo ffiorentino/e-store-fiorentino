@@ -10,7 +10,7 @@ const ItemCount  = ( {data, onAdd} ) => {
             setContador(contador + 1)
     }
     const removeNumber = () => {
-        if (contador > 0)
+        if (contador > 1)
             setContador(contador - 1)
     }    
 
