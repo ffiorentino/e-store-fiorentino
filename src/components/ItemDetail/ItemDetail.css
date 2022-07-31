@@ -1,0 +1,16 @@
+.item-detail-product {
+    border: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}   
+
+img {
+    display: flex;
+    float: left;
+    width: 60%;
+}
+
+
