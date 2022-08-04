@@ -8,5 +8,5 @@ const CartWidget = () => {
         </div>
     )
 }
-//style={{color: 'white'}}
+
 export default CartWidget

@@ -10,6 +10,7 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import CartWidget from './CartWidget';
+import { Link } from 'react-router-dom'
 
 
 const pages = ['Inicio', 'Productos', 'Quiénes Somos', 'Contacto'];
@@ -43,7 +44,7 @@ const ResponsiveAppBar = () => {
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            //href="/"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -54,7 +55,7 @@ const ResponsiveAppBar = () => {
               textDecoration: 'none',
             }}
           >
-          E-Store
+          <Link to="/" style={{textDecoration: 'none', color: 'white'}}> E-Store</Link>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -97,7 +98,7 @@ const ResponsiveAppBar = () => {
             variant="h5"
             noWrap
             component="a"
-            href=""
+            //href=""
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -112,15 +113,44 @@ const ResponsiveAppBar = () => {
             E-Store
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
+            <Link to="/" style={{textDecoration: 'none', color: 'white'}}>
               <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  Inicio
               </Button>
-            ))}
+            </Link>
+            <Link to="/category/notebook" style={{textDecoration: 'none', color: 'white'}}>
+              <Button
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  Notebooks
+              </Button>
+            </Link>
+            <Link to="/category/celular" style={{textDecoration: 'none', color: 'white'}}>
+              <Button
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  Celulares
+              </Button>
+            </Link>            
+            <Link to="/about" style={{textDecoration: 'none', color: 'white'}}>
+              <Button
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                  Quiénes Somos
+              </Button>
+            </Link>
+            <Link to="/contacto" style={{textDecoration: 'none', color: 'white'}}>
+              <Button
+                  sx={{ my: 2, color: 'white', display: 'block' }}
+                >
+                Contacto
+              </Button>
+            </Link>                                    
+            {/* <Link to="/productos"><button>Productos</button></Link>
+            <Link to=""><button>About Us</button></Link>
+            <Link to="/contacto"><button>Contacto</button></Link>    */}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
