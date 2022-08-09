@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import './ItemCount.css'
 
-const ItemCount  = ( {data, onAdd} ) => {
+const ItemCount  = ( {initial, stock, onAdd} ) => {
 
-    const {title, image, price, stock, initial} = data
+    //const {title, image, price, stock, initial} = data
 
     const addNumber = () => {
         if (contador < stock)
@@ -18,10 +18,7 @@ const ItemCount  = ( {data, onAdd} ) => {
 
     return(
         <div className='item-product'>
-            <img src={`/assets/${image}`} alt="Imagen producto" />
             <div className='detail-product'>
-                <p>{title}</p>
-                <span>$ {price}</span>
                 <div className='countProd'>
                     <button 
                         onClick={removeNumber}

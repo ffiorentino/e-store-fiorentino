@@ -1,9 +1,14 @@
 import React from 'react'
+import { useState } from 'react'
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import DeliveryDiningIcon from '@mui/icons-material/DeliveryDining';
+import ItemCount from '../ItemCount/ItemCount';
+import { Link } from 'react-router-dom'
+
 import './ItemDetail.css'
 
 const ItemDetail = ( {item} ) => {
+    const [quantitySelected, setQuantitySelected] = useState(0)
 
     const {id, title, image, price, stock, initial} = item;
 
@@ -18,6 +23,11 @@ const ItemDetail = ( {item} ) => {
                         <p><DeliveryDiningIcon />Envio Gratis</p>                        
                         <p>${price}</p>
                     </div>
+                    {
+                         quantitySelected > 0 ? <button><Link to="/cart">TERMINAR COMPRA</Link></button> 
+                                              : <ItemCount initial={1} stock={stock} onAdd={setQuantitySelected} />
+
+                    }                    
                 </div>
             </div>
         </div>
