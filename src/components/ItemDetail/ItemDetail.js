@@ -1,14 +1,22 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import CreditCardIcon from '@mui/icons-material/CreditCard';
 import DeliveryDiningIcon from '@mui/icons-material/DeliveryDining';
 import ItemCount from '../ItemCount/ItemCount';
+import { CartContext } from '../../context/CartContext';
+
 import { Link } from 'react-router-dom'
 
 import './ItemDetail.css'
 
 const ItemDetail = ( {item} ) => {
     const [quantitySelected, setQuantitySelected] = useState(0)
+
+    const { addProductToCart } = useContext(CartContext);
+
+    const handlerOnAdd = (cantidad) => {
+        addProductToCart({ ...item, cantidad: cantidad })        
+    }
 
     const {id, title, image, price, stock, initial} = item;
 
@@ -25,7 +33,7 @@ const ItemDetail = ( {item} ) => {
                     </div>
                     {
                          quantitySelected > 0 ? <button><Link to="/cart">TERMINAR COMPRA</Link></button> 
-                                              : <ItemCount initial={1} stock={stock} onAdd={setQuantitySelected} />
+                                              : <ItemCount initial={1} stock={stock} onAdd={handlerOnAdd} />
 
                     }                    
                 </div>

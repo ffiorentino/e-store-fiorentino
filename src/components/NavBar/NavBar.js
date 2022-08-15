@@ -11,6 +11,7 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import CartWidget from './CartWidget';
 import { Link } from 'react-router-dom'
+import './NavBar.scss'
 
 
 const pages = ['Inicio', 'Productos', 'Quiénes Somos', 'Contacto'];
@@ -24,8 +25,8 @@ const ResponsiveAppBar = () => {
     setAnchorElNav(event.currentTarget);
   };
   const handleOpenUserMenu = (event) => {
-    console.log('Abrir carrito');
-    //setAnchorElUser(event.currentTarget);
+    //console.log('Abrir carrito');
+    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {

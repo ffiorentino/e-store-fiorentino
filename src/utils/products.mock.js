@@ -6,7 +6,7 @@ const products = [
         price: 136000,
         image: 'note1.jpg',
         stock: 6,
-        intial: 0
+        initial: 0
     },
     {
         id:2,
@@ -15,7 +15,7 @@ const products = [
         price: 120000,
         image: 'note2.jpg',
         stock: 2,
-        intial: 0
+        initial: 0
     },
     {
         id:3,
@@ -24,7 +24,7 @@ const products = [
         price: 219000,
         image: 'note3.jpg',
         stock: 7,
-        intial: 0
+        initial: 0
     },
     {
         id:4,
@@ -33,7 +33,7 @@ const products = [
         price: 168000,
         image: 'note4.jpg',
         stock: 25,
-        intial: 0
+        initial: 0
     },
     {
         id:5,
@@ -42,7 +42,7 @@ const products = [
         price: 189000,
         image: 'note5.jpg',
         stock: 1,
-        intial: 0
+        initial: 0
     },
     {
         id:6,
@@ -51,7 +51,7 @@ const products = [
         price: 210000,
         image: 'note6.jpg',
         stock: 3,
-        intial: 0
+        initial: 0
     },
     {
         id:7,
@@ -60,7 +60,7 @@ const products = [
         price: 200000,
         image: 'note7.jpg',
         stock: 9,
-        intial: 0
+        initial: 0
     },
     {
         id:8,
@@ -69,7 +69,7 @@ const products = [
         price: 50000,
         image: 'celular1.jpg',
         stock: 9,
-        intial: 0
+        initial: 0
     },  
     {
         id:9,
@@ -78,7 +78,7 @@ const products = [
         price: 35000,
         image: 'celular2.jpg',
         stock: 9,
-        intial: 0
+        initial: 0
     },     
 ]
 
