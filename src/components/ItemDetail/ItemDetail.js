@@ -10,12 +10,14 @@ import { Link } from 'react-router-dom'
 import './ItemDetail.css'
 
 const ItemDetail = ( {item} ) => {
-    const [quantitySelected, setQuantitySelected] = useState(0)
+    //const [quantitySelected, setQuantitySelected] = useState(0)
+    const [checkout, setCheckout] = useState(false)
 
     const { addProductToCart } = useContext(CartContext);
 
     const handlerOnAdd = (cantidad) => {
-        addProductToCart({ ...item, cantidad: cantidad })        
+        addProductToCart({ ...item, cantidad: cantidad })      
+        setCheckout(true)  
     }
 
     const {id, title, image, price, stock, initial} = item;
@@ -32,8 +34,8 @@ const ItemDetail = ( {item} ) => {
                         <p>${price}</p>
                     </div>
                     {
-                         quantitySelected > 0 ? <button><Link to="/cart">TERMINAR COMPRA</Link></button> 
-                                              : <ItemCount initial={1} stock={stock} onAdd={handlerOnAdd} />
+                         (checkout) ? <button><Link to="/cart">TERMINAR COMPRA</Link></button> 
+                                    : <ItemCount initial={1} stock={stock} onAdd={handlerOnAdd} />
 
                     }                    
                 </div>

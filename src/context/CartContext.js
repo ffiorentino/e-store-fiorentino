@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
 
+
 const CartContext = createContext()
 
 const CartProvider = ({children}) => {
@@ -10,7 +11,7 @@ const CartProvider = ({children}) => {
         let isInCart = cartProducts.find(cartItem => cartItem.id === item.id)
         if(!isInCart) {
             console.log("item:", item)
-            setTotalProducts(totalProducts + 1)
+            setTotalProducts(totalProducts + item.cantidad)
             setCartProducts(cartProducts => [...cartProducts, item])
         }
         else {
@@ -21,13 +22,14 @@ const CartProvider = ({children}) => {
             const newCart = [...cartProducts];
             newCart.splice( index, 1, product );
 
+            setTotalProducts(totalProducts + item.cantidad)
             setCartProducts([ ...newCart ]);                    
         }
     }
 
     const deleteProduct = (item) => {
         setCartProducts(cartProducts.filter( (cartProduct) => cartProduct.id !== item.id) )
-        setTotalProducts(totalProducts - 1)
+        setTotalProducts(totalProducts - item.cantidad)
     }
 
     const clear = () => {
@@ -35,13 +37,18 @@ const CartProvider = ({children}) => {
         setTotalProducts(0)
     }
 
+    const sumaPrecioItems = () => {
+        return cartProducts.reduce((acum, valor) => (acum +(valor.cantidad * valor.price)), 0)
+    }      
+
     const data = {
         cartProducts,
         setCartProducts,
         deleteProduct,
         clear,
         addProductToCart,
-        totalProducts
+        totalProducts,
+        sumaPrecioItems
     }
 
     return(

@@ -154,9 +154,9 @@ const ResponsiveAppBar = () => {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <CartWidget /> 
-              </IconButton>
+              <Link to='/cart' className="cart-link">
+                <CartWidget />  
+              </Link>  
             <Menu
               sx={{ mt: '45px' }}
               id="menu-appbar"
