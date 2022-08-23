@@ -4,13 +4,30 @@ import ItemDetail from "../ItemDetail/ItemDetail"
 import products from '../../utils/products.mock'
 import CircularProgress from '@mui/material/CircularProgress';
 import { useParams } from "react-router-dom"
-
+import db from "../../firebaseConfig"
+import { doc, getDoc } from "firebase/firestore"
 
 const ItemDetailContainer = ({section}) => {
 
     const [item, setItem] = useState({})
     //const [loading, setLoading] = useState(false);
     const { id } = useParams()
+
+
+    useEffect( () => {
+        getProduct()
+        .then((res) => {
+            setItem(res)
+        })
+    }, [id])
+
+    const getProduct = async () => {
+        const docRef = doc(db, 'productos', id)
+        const docSnapshot = await getDoc(docRef)
+        let product = docSnapshot.data()
+        product.id = docSnapshot.id
+        return product
+    }    
 
     // const getItem = new Promise( (resolve, reject) => {
     //     setTimeout( () => {
@@ -31,18 +48,18 @@ const ItemDetailContainer = ({section}) => {
     //         })
     // }, [])   
     
-    useEffect( () => {
-        filterById()
-    }, [id])
+    // useEffect( () => {
+    //     filterById()
+    // }, [id])
 
-    const filterById = () => {
-        products.some( (product) => {
-            if(product.id == id) {
-                setItem(product) 
-            }
-        }
-        )
-    }    
+    // const filterById = () => {
+    //     products.some( (product) => {
+    //         if(product.id == id) {
+    //             setItem(product) 
+    //         }
+    //     }
+    //     )
+    // }    
 
 
     return(

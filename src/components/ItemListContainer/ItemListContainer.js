@@ -3,6 +3,9 @@ import ItemCount from "../ItemCount/ItemCount"
 import ItemList from "../ItemList/ItemList"
 import products from '../../utils/products.mock'
 import { useParams, Link } from "react-router-dom"
+import { collection, getDocs, query, where } from "firebase/firestore"
+import db from "../../firebaseConfig"
+//import { query, where } from "firebase/firestore";
 
 
 const ItemListContainer = ({section}) => {
@@ -15,14 +18,36 @@ const ItemListContainer = ({section}) => {
     //     }, 2000)
     // })
 
-    useEffect( () => {
-        filterByCategoryId()
-    }, [categoryId])
+    const getProducts = async () => {
+        const productCollection = (categoryId) ? query(collection(db, 'productos'), where("category", "==", categoryId))
+                                               : collection(db, 'productos')
+        console.log('Collection: ', productCollection)
+        const productSnapshot = await getDocs(productCollection)
+        const productList = productSnapshot.docs.map( (doc) => {
+            let product = doc.data()
+            product.id = doc.id
+            return product
+        })
+        return productList
+    }
 
-    const filterByCategoryId = () => {
-        (categoryId) ? setListProducts(products.filter(product => product.category === categoryId)) 
-                     : setListProducts(products)
-    }    
+    useEffect(() => {
+        getProducts()
+        .then((res) => {
+            setListProducts(res)        
+        })
+    }, [categoryId])    
+
+    //const dbQuery = categoryId ? db.collection('productos').where('category', '==', categoryId) : db.collection('productos')
+
+    // useEffect( () => {
+    //     filterByCategoryId()
+    // }, [categoryId])
+
+    // const filterByCategoryId = () => {
+    //     (categoryId) ? setListProducts(products.filter(product => product.category === categoryId)) 
+    //                  : setListProducts(products)
+    // }    
 
     // useEffect(() => {
     //     getProducts
