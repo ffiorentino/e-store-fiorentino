@@ -6,12 +6,14 @@ const CartContext = createContext()
 const CartProvider = ({children}) => {
     const [cartProducts, setCartProducts] = useState([])
     const [totalProducts, setTotalProducts] = useState(0)
+    const [totalPrice, setTotalPrice] = useState(0)
 
     const addProductToCart = (item) => {
         let isInCart = cartProducts.find(cartItem => cartItem.id === item.id)
         if(!isInCart) {
             console.log("item:", item)
             setTotalProducts(totalProducts + item.cantidad)
+            setTotalPrice(totalPrice + item.price)
             setCartProducts(cartProducts => [...cartProducts, item])
         }
         else {
@@ -23,6 +25,7 @@ const CartProvider = ({children}) => {
             newCart.splice( index, 1, product );
 
             setTotalProducts(totalProducts + item.cantidad)
+            setTotalPrice(totalPrice + item.price)
             setCartProducts([ ...newCart ]);                    
         }
     }
@@ -48,7 +51,8 @@ const CartProvider = ({children}) => {
         clear,
         addProductToCart,
         totalProducts,
-        sumaPrecioItems
+        sumaPrecioItems,
+        totalPrice
     }
 
     return(
