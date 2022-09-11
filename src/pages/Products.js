@@ -4,9 +4,9 @@ const Products = () => {
     return(
         <div>
             <section>
-                <ItemListContainer section={""} />
+                <ItemListContainer section={""}/>
             </section>
-        </div>
+        </div>        
     )
 }
 

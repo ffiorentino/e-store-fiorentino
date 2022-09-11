@@ -1,24 +1,29 @@
 import {Link} from 'react-router-dom'
-import './Item.css'
+import Button from '@mui/material/Button';
+import './Item.scss'
 
 const Item  = ( {data} ) => {
 
-    const {id, title, image, price, stock, initial} = data
+    const {id, title, image, price } = data
 
     return(
-        <div className='item-product'>
-            <img src={`/assets/${image}`} alt="Imagen producto" />
-            <div className='detail-product'>
-                <p>{title}</p>
-                <span>$ {price}</span>
-                <div className='addCarrito'>
-                    <Link to={`/item/${id}`}>
-                        <button>Ver detalles</button>
-                    </Link>                    
-			    </div>
-                <div className='countProd'>
-                    <p>Stock disponible: {stock}</p>
-                </div>                
+        <div className='productCard'>
+            <div className="card">
+                <div className="card-image">
+                    <img src={`/assets/${image}`} alt="Imagen producto" />
+                    <span className="card-title">$ { price }</span>
+                </div>
+
+                <div className="card-content">
+                    <p>{title}</p>
+                
+                    <Link to={`/item/${id}`} style={{ textDecoration: 'none'}}>
+                            <Button variant="contained" href="#contained-buttons">
+                                Ver Detalles
+                            </Button>                        
+                    </Link>  
+                </div>
+
             </div>
         </div> 
     )

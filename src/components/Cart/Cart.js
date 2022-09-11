@@ -5,7 +5,10 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { Link } from 'react-router-dom'
 import Modal from '../Modal/Modal'
 import db from '../../firebaseConfig.js'
+import toast, { Toaster } from 'react-hot-toast';
 import { collection, addDoc } from 'firebase/firestore'
+import Button from '@mui/material/Button';
+
 
 
 const Cart  = () => {
@@ -32,19 +35,36 @@ const Cart  = () => {
     
     const handleChange = (e) => {
         setFormData({...formData, [e.target.name] : e.target.value})
-    }   
+    }  
+    
+    const isFormValid = () => {
+        if (formData.name.length === 0) {
+            toast.error('Para registrar la compra debe ingresar el Nombre.'); 
+            return false;
+        }        
+        if (formData.phone.length === 0) {
+            toast.error('Para registrar la compra debe ingresar el Teléfono.'); 
+            return false;
+        }
+        if (formData.email.length === 0) {
+            toast.error('Para registrar la compra debe ingresar el E-Mail.'); 
+            return false;
+        }   
+
+        return true;
+    }       
     
     const submitData = (e) => {
         e.preventDefault()
-        console.log("order para enviar: ", {...order, buyer: formData})
-        pushData({...order, buyer: formData})
+        if (isFormValid())
+            pushData({...order, buyer: formData})
     }
     
     const pushData = async (newOrder) => {
         const collectionOrder = collection(db, 'ordenes')
         const orderDoc = await addDoc(collectionOrder, newOrder)
         setSuccess(orderDoc.id)
-        console.log('ORDEN GENERADA', orderDoc)
+        toast.success('La orden fue generada exitosamente.'); 
     }    
 
     return(
@@ -52,10 +72,12 @@ const Cart  = () => {
             { !cartProducts.length > 0 
                 ?
                 <>
-                    <h1>NO HAY PRODUCTOS SELECCIONADOS</h1>
-                    <Link to="/">
-                        <button>Ir a Comprar</button>
-                    </Link>                    
+                    <h2>NO HAY PRODUCTOS SELECCIONADOS</h2>
+                    <Link to="/" style={{ textDecoration: 'none'}}>
+                         <Button variant="contained" href="#contained-buttons">
+                            Ir a Comprar
+                        </Button>                            
+                    </Link>                      
                 </>              
                 :
                 <div>
@@ -65,13 +87,13 @@ const Cart  = () => {
                             <div className='item-cart-product' key={product.id}>
                                 <img src={`/assets/${product.image}`} alt="" />
                                 <div className='cart-product__title'>
-                                    <p>{product.title}</p>
+                                    <h5 style={{fontWeight: '500'}}>{product.title}</h5>
                                 </div>
                                 <div className='cart-product__price'>
-                                    <p>$ {product.price}</p>
+                                    <p><b>$ {product.price}</b></p>
                                 </div>   
                                 <div className='cart-product__quantity'>
-                                    <p>{product.cantidad}</p>
+                                    <p><b>{product.cantidad}</b></p>
                                 </div>                                                  
                                 <div className='cart-product__action' >
                                     <DeleteIcon onClick={() => deleteProduct(product)}/>
@@ -79,11 +101,24 @@ const Cart  = () => {
                             </div>                   
                     )}
 
-                    <div>
+                    <div style={ {float: 'right'} }>
                         <h4>Total: ${sumaPrecioItems()}</h4>
                         <div>
-                            <button onClick={() => setShowModal(true)}>IR A PAGAR</button>
-                            <button onClick={ clear } className="btn-secondary ml-2">Limpiar Carrito</button>
+                            <Button 
+                                    variant="contained" 
+                                    href="#contained-buttons"
+                                    onClick={() => setShowModal(true)}
+                            >
+                                Pagar
+                            </Button>  
+                            <Button 
+                                    variant="contained" 
+                                    href="#contained-buttons"
+                                    onClick={clear}
+                                    style= { {marginLeft: '10px'} }
+                            >
+                                Limpiar Carrito
+                            </Button>  
                         </div>  
                     </div> 
 
@@ -96,41 +131,57 @@ const Cart  = () => {
                             </>
                         ) : (
                             <form onSubmit={submitData}>
-                                <TextField
-                                    label="Nombre"
-                                    name='name'
-                                    id="outlined-size-small"
-                                    onChange={handleChange}
-                                    value={formData.name}
-                                    size="small"
-                                />  
-                                <TextField
-                                    type='number'
-                                    label="Telefono"
-                                    name='phone'
-                                    id="outlined-size-small"
-                                    onChange={handleChange}
-                                    value={formData.phone}
-                                    size="small"
-                                />
-                                <TextField
-                                    type='email'
-                                    label="E-Mail"
-                                    name='email'
-                                    id="outlined-size-small"
-                                    onChange={handleChange}
-                                    value={formData.email}
-                                    size="small"
-                                />                                                                                                    
-                                <button type="submit">Enviar</button>
+                                     <div style={{ width: '100%'}}>
+                                        <TextField
+                                            label="Nombre"
+                                            name='name'
+                                            id="standard-size-normal"
+                                            //defaultValue="no"
+                                            size="small"
+                                            variant="standard"
+                                            onChange={handleChange}
+                                            value={formData.name}
+                                            style={{ width: '100%'}}
+                                        />
+                                    </div>   
+                                    <div>       
+                                        <TextField
+                                            type='number'
+                                            label="Telefono"
+                                            name='phone'
+                                            id="standard-size-normal"
+                                            defaultValue="Normal"
+                                            variant="standard"
+                                            onChange={handleChange}
+                                            value={formData.phone}
+                                            style={{ width: '100%'}}
+                                        />
+                                    </div>   
+                                    <div>       
+                                        <TextField
+                                            type='email'
+                                            label="E-Mail"
+                                            name='email'
+                                            id="standard-size-normal"
+                                            defaultValue="Normal"
+                                            variant="standard"
+                                            onChange={handleChange}
+                                            value={formData.email}
+                                            style={{ width: '100%'}}
+                                        />
+                                    </div>   
+                                    <div style={{ textAlign: 'right', marginTop: '10px'}}>       
+                                        <button className='btn-small waves-effect waves-light' type="submit">Enviar</button>
+                                    </div>                                                                     
                             </form>
                         )}
                     </Modal>
                 }
-
+                <Toaster />   
                 </div>               
             }
-        </div>        
+        </div>   
+  
     )
 }
 

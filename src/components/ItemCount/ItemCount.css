@@ -1,6 +1,5 @@
 .item-product {
     float: left;
-    width: calc(20% - 8px);
     box-shadow: 1px 1px 5px #afafaf47;
     border: 10px;
     display: flex;

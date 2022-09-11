@@ -1,9 +1,8 @@
 import { useState } from 'react'
+import Button from '@mui/material/Button';
 import './ItemCount.css'
 
 const ItemCount  = ( {initial, stock, onAdd} ) => {
-
-    //const {title, image, price, stock, initial} = data
 
     const addNumber = () => {
         if (contador < stock)
@@ -31,13 +30,13 @@ const ItemCount  = ( {initial, stock, onAdd} ) => {
                     >+</button>
                 </div>
                 <div className='addCarrito'>
-                    <button
-                        onClick={() => {
-                            onAdd(contador)
-                        }}
-                        disabled={stock === 0}>
+                    <Button variant="contained" 
+                            href="#contained-buttons"
+                            onClick={() => {onAdd(contador)}}
+                            disabled={stock === 0}
+                    >
                         Agregar al Carrito
-                    </button>
+                    </Button>                        
 			    </div>
             </div>
         </div> 

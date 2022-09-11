@@ -14,8 +14,7 @@ import { Link } from 'react-router-dom'
 import './NavBar.scss'
 
 
-const pages = ['Inicio', 'Productos', 'Quiénes Somos', 'Contacto'];
-//const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const pages = ['Inicio', 'Productos', 'Quienes Somos', 'Contacto'];
 
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -23,10 +22,6 @@ const ResponsiveAppBar = () => {
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    //console.log('Abrir carrito');
-    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
@@ -44,7 +39,6 @@ const ResponsiveAppBar = () => {
           <Typography
             variant="h6"
             noWrap
-            //component="a"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -97,8 +91,6 @@ const ResponsiveAppBar = () => {
           <Typography
             variant="h5"
             noWrap
-            //component="a"
-            //href=""
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -138,7 +130,7 @@ const ResponsiveAppBar = () => {
               <Button
                   sx={{ my: 2, color: 'white', display: 'block' }}
                 >
-                  Quiénes Somos
+                  Quienes Somos
               </Button>
             </Link>
             <Link to="/contacto" style={{textDecoration: 'none', color: 'white'}}>
@@ -148,9 +140,6 @@ const ResponsiveAppBar = () => {
                 Contacto
               </Button>
             </Link>                                    
-            {/* <Link to="/productos"><button>Productos</button></Link>
-            <Link to=""><button>About Us</button></Link>
-            <Link to="/contacto"><button>Contacto</button></Link>    */}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
